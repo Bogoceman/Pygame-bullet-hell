@@ -1,0 +1,1 @@
+GAME_NAME = "Les Chtis a Mykonos"

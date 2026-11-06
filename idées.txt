@@ -1,0 +1,5 @@
+    -   le jeu sera un bullet hell
+
+    -  jeu d'animaux où l'on incarne un braconnier et où l'on capture les des animeaux
+        ou
+        jeu où l'on joue un animal qui doit libérer des animaux des braconnier 
