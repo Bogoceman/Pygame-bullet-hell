@@ -9,7 +9,13 @@ class Game:
         
         self.name = pygame.display.set_caption(GAME_NAME)
         
+        self.bg_image = pygame.image.load("assets/main_menu/main_menu_bg.png")
+        
         self.running = True
+        
+        self.bg_image = pygame.transform.scale(self.bg_image, self.screen.get_size())
+        
+        self.play_button = pygame.image.load("assets/main_menu/play.png").convert_alpha()
     
     def keyboard(self):
 
@@ -26,21 +32,14 @@ class Game:
             
     def run(self):
         clock = pygame.time.Clock()
-        while self.running :
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.running = False
-                    pygame.quit() 
-                    
-                    
-    def run(self):
-        clock = pygame.time.Clock()
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
-                    pygame.quit() 
                     
-
+            self.screen.blit(self.bg_image, (0, 0))
+            self.screen.blit(self.play_button, (self.screen.get_width() // 2 - self.play_button.get_width() // 2, self.screen.get_height() // 1.5 - self.play_button.get_height() // 2))
+            self.play_button = pygame.transform.scale(self.play_button, (400, 150))
             pygame.display.flip()
             clock.tick(60)
+        pygame.quit() 
