@@ -1,0 +1,2 @@
+# Vrai pygame (nécessite Python 3.13, pas de wheel pour 3.15)
+pygame==2.6.1
