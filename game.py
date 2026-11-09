@@ -1,4 +1,5 @@
 import pygame
+from music import *
 from constants import *
 
 class Game:
@@ -12,6 +13,8 @@ class Game:
         self.bg_image = pygame.image.load("assets/main_menu/main_menu_bg.png")
         
         self.running = True
+        
+        self.music = current_music
         
         self.bg_image = pygame.transform.scale(self.bg_image, self.screen.get_size())
         
@@ -47,6 +50,7 @@ class Game:
             self.play_button = pygame.transform.scale(self.play_button, (400, 150))
             pygame.display.flip()
             
+            
             clock.tick(60)
-        pygame.quit() 
+        pygame.quit()
         
