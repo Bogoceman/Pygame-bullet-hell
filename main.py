@@ -1,7 +1,9 @@
-import pygame
 from game import Game
 
 
-pygame.init()
-game = Game()
-game.run()
+def main():
+    Game().run()
+
+
+if __name__ == "__main__":
+    main()
