@@ -1,7 +1,7 @@
 # Crazy Safari
 
 Un petit *bullet hell* façon Touhou, situé dans la savane. On pilote le camion
-du chasseur, on esquive les balles des hyènes et on affronte la reine hyène.
+du chasseur, on esquive les projectiles des animaux.
 
 ## Lancer le jeu
 

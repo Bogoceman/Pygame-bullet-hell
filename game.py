@@ -8,8 +8,9 @@ from pygame.math import Vector2
 
 from assets import Assets, asset_path
 from bosses import BOSS_CLASSES
-from music import start_gun_loop, start_menu_music, stop_gun_loop
+from music import _play_music, start_gun_loop, start_menu_music, stop_gun_loop
 from constants import (
+    BULLET_HIT_SCORE,
     BOSS_WARNING_TIME,
     BG_SCROLL_SPEED,
     BOSS_INTERMISSION,
@@ -213,8 +214,10 @@ class Game:
         elif self.state in ("gameover", "win"):
             if key in (pygame.K_r, pygame.K_RETURN, pygame.K_KP_ENTER):
                 self.start_game()
+                start_menu_music()
             elif key in (pygame.K_m, pygame.K_ESCAPE):
                 self.go_menu()
+                start_menu_music()
 
     def handle_click(self, pos):
         if self.state == "menu":
@@ -223,7 +226,9 @@ class Game:
         elif self.state in ("gameover", "win"):
             if self.replay_rect.collidepoint(pos):
                 self.start_game()
+                start_menu_music()
             elif self.menu_rect.collidepoint(pos):
+                start_menu_music()
                 self.go_menu()
 
     def update_mouse(self, screen_pos=None):
@@ -398,6 +403,7 @@ class Game:
                     boss.radius + bullet.radius
                 ) ** 2:
                     bullet.dead = True
+                    self.bullet_hit_enemy()
                     self.add_particles(bullet.pos, "gold", 2, 80, 0.25)
                     if boss.hit(PLAYER_BULLET_DAMAGE):
                         self.on_boss_defeated()
@@ -410,10 +416,14 @@ class Game:
                     minion.radius + bullet.radius
                 ) ** 2:
                     bullet.dead = True
+                    self.bullet_hit_enemy()
                     self.add_particles(bullet.pos, "gold", 2, 80, 0.25)
                     if minion.hit(PLAYER_BULLET_DAMAGE):
                         self.kill_minion(minion)
                     break
+                
+    def bullet_hit_enemy(self):
+        self.score += BULLET_HIT_SCORE
 
     def collide_enemy_bullets(self):
         player = self.player
@@ -472,6 +482,8 @@ class Game:
         if self.player.lives <= 0:
             self.set_banner("GAME OVER", 2.0, RED)
             self.finish("gameover")
+            _play_music("assets/game/game_over_OST.mp3", 0.10, "gameover")
+
         else:
             self.player.pos = Vector2(
                 PLAYFIELD_WIDTH / 2, PLAYFIELD_HEIGHT - 150

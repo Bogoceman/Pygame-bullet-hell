@@ -177,6 +177,11 @@ class Boss:
             self.growl_volume,
             GROWL_CHANNEL,
         )
+        
+    def on_entered(self):
+        """Appelé par le jeu quand le boss est entré dans l'arène (son de
+        grognement, etc.)."""
+        self.pygame.mixer.music.load(self.entry_sound)
 
     def on_defeated(self):
         """Appelé par le jeu quand le boss meurt (son de défaite, etc.)."""
@@ -231,6 +236,9 @@ class HyenaQueen(Boss):
     name = "REINE HYÈNE"
     max_hp_value = BOSS_HP
     score_value = BOSS_SCORE
+    growl_sounds = (HYENA_SOUNDS + "hyena_growl_1.wav", HYENA_SOUNDS + "hyena_growl_2.wav")
+    defeat_sound = HYENA_SOUNDS + "hyena_defeated.wav"
+    entry_sound = HYENA_SOUNDS + "hyena_entry.wav"
 
     def __init__(self, assets):
         super().__init__(assets)
@@ -239,8 +247,8 @@ class HyenaQueen(Boss):
         self.spiral_cd = 0.18
         self.ring_offset = random.uniform(0, math.tau)
         self.spiral_angle = random.uniform(0, math.tau)
-        self.entry_sound = HYENA_SOUNDS + "hyena_entry.wav"
-        _play_music(HYENA_SOUNDS + "hyana_ost_boss.mp3", 0.32, "boss")
+        self.on_entered
+        _play_music(HYENA_SOUNDS + "hyana_ost_boss.mp3", 0.10, "boss")
 
     def attack(self, dt, player_pos, bullets):
         # Tir visé.

@@ -55,14 +55,14 @@ def start_menu_music():
     """Musique de fond normale (menu et manche)."""
     if current_track == "menu":
         return
-    _play_music(MUSIC_PATH, 0.32, "menu")
+    _play_music(MUSIC_PATH, 0.10, "menu")
 
 
 def start_boss_music():
     """Musique de boss, lancée à l'apparition du premier boss."""
     if current_track == "boss":
         return
-    _play_music(BOSS_MUSIC_PATH, 0.30, "boss")
+    _play_music(BOSS_MUSIC_PATH, 0.10, "boss")
 
 
 def stop_music():
@@ -119,7 +119,7 @@ def start_gun_loop():
     try:
         if _gun_sound is None:
             _gun_sound = pygame.mixer.Sound(GUN_SOUND_PATH)
-            _gun_sound.set_volume(0.15)
+            _gun_sound.set_volume(0.05)
         channel = _get_gun_channel()
         # Ne pas relancer la boucle à chaque coup : sinon le son repart de
         # zéro en permanence et perd son rythme.
